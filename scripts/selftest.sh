@@ -66,6 +66,6 @@ HOME="$T/home" "$PY" "$PKG/tools/setup.py" install --pkg "$PKG" --vault "$SB_VAU
 [ "$(grep -c 'second-brain:start' "$T/home/.claude/CLAUDE.md")" = "1" ] || fail "block duplicated on reinstall"
 [ "$(grep -c 'lint --hook' "$T/home/.claude/settings.json")" = "1" ] || fail "hook duplicated on reinstall"
 HOME="$T/home" "$PY" "$PKG/tools/setup.py" uninstall >/dev/null
-grep -q "brain" "$T/home/.claude/settings.json" && fail "uninstall left settings"
+grep -q "brain\|$SB_VAULT" "$T/home/.claude/settings.json" && fail "uninstall left settings"
 [ -d "$SB_VAULT/Projects" ] || fail "uninstall touched the vault"
 echo "SELFTEST_OK"

@@ -207,6 +207,13 @@ def cmd_uninstall(a):
     f, s = _load_settings()
     if s:
         s = _strip_ours(s)
+        try:
+            vault = json.loads((SB_HOME / "config.json").read_text())["vault"]
+            dirs = s.get("permissions", {}).get("additionalDirectories", [])
+            if vault in dirs:
+                dirs.remove(vault)
+        except Exception:
+            pass
         f.write_text(json.dumps(s, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     say("Claude config removed; the vault and ~/.second-brain/config.json were kept")
 

@@ -39,7 +39,7 @@ if [ -z "$PY" ]; then
     if [ ! -x "$UV" ]; then
       curl -LsSf --retry 3 https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="$SB_HOME/uv" UV_NO_MODIFY_PATH=1 INSTALLER_NO_MODIFY_PATH=1 sh >/dev/null || true
     fi
-    [ -x "$UV" ] && "$UV" python install 3.12 && break
+    [ -x "$UV" ] && { "$UV" python install 3.12 --no-bin 2>/dev/null || "$UV" python install 3.12; } && break
     echo "network hiccup, retrying ($attempt/3)"; sleep 5
   done
   PY="$("$UV" python find 3.12)"
