@@ -1,0 +1,3 @@
+/* Notes with `cssclasses: [rtl]` read right-to-left (Hebrew, Arabic). Code stays left-to-right. */
+.rtl .cm-contentContainer, .rtl .markdown-preview-sizer, .rtl .inline-title, .rtl .cm-line { direction: rtl; text-align: right; }
+.rtl pre, .rtl code, .rtl .metadata-container { direction: ltr; text-align: left; }
